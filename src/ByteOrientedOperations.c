@@ -9,6 +9,6 @@ void tearDown() {}
 void movff(Bytecode *code){
 	int temp;
 	
-	FSR[code->operand1] = FSR[code->operand2];
+	FSR[code->operand2] = FSR[code->operand1];
 
 }

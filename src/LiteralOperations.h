@@ -5,5 +5,5 @@
 
 extern char FSR[];
 
-
+void sublw(Bytecode *code);
 #endif	// __LITERALOPERATIONS_H__

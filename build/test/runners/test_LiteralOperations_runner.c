@@ -31,7 +31,6 @@ char* GlobalOrderError;
 extern void setUp(void);
 extern void tearDown(void);
 extern void test_sublw_1_minus_1_equal_0(void);
-extern void test_sublw_1_minus_2_equal_neg1(void);
 
 
 //=======Test Reset Option=====
@@ -48,7 +47,6 @@ int main(void)
   Unity.TestFile = "test_LiteralOperations.c";
   UnityBegin();
   RUN_TEST(test_sublw_1_minus_1_equal_0, 8);
-  RUN_TEST(test_sublw_1_minus_2_equal_neg1, 19);
 
   return (UnityEnd());
 }

@@ -15,6 +15,7 @@ void test_sublw_1_minus_1_equal_0(){
 	
 	TEST_ASSERT_EQUAL(0, FSR[WREG]);
 	TEST_ASSERT_EQUAL_HEX8(0, FSR[WREG]);
+
 }
 
 

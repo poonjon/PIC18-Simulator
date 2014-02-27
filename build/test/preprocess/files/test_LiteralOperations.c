@@ -29,4 +29,6 @@ void test_sublw_1_minus_1_equal_0(){
 
  UnityAssertEqualNumber((_U_SINT)(_US8 )((0)), (_U_SINT)(_US8 )((FSR[0xfe8])), (((void *)0)), (_U_UINT)17, UNITY_DISPLAY_STYLE_HEX8);
 
+ if (((-) != (FSR[0xfe8]))) {} else {UnityFail( (" Expected Not-Equal"), (_U_UINT)(_U_UINT)18);;};
+
 }

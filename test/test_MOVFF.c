@@ -1,8 +1,9 @@
 #include "unity.h"
 #include "Bytecode.h"
-#include "ByteOrientedOperations.h"
+#include "MOVFF.h"
 
-char FSR[0x1000];
+void setUp() {}
+void tearDown() {}
 
 void test_movff_mov_file_location_1_to_2(){
 	Instruction inst = { .mnemonic = MOVFF, .name = "movff" };

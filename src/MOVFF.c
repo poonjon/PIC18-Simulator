@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include "Bytecode.h"
-#include "ByteOrientedOperations.h"
+#include "MOVFF.h"
 
-
-void setUp() {}
-void tearDown() {}
+char FSR[0x1000];
 
 void movff(Bytecode *code){
 

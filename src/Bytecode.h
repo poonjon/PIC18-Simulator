@@ -1,10 +1,22 @@
 #ifndef	__BYTECODE_H__
 #define	__BYTECODE_H__
 
-typedef enum 	{
-					MOVFF,
-					SWAPF
-				} Mnemonic;
+typedef enum {
+	ACCESS = -5,
+	BANKED,
+	F,
+	W
+} Operand;
+
+typedef enum {
+	NO_ERROR,
+	ERR_INVALID_OPERAND
+} ExceptionError;
+
+typedef enum {
+	MOVFF,
+	SWAPF
+} Mnemonic;
 				
 typedef struct {
 	Mnemonic	mnemonic;

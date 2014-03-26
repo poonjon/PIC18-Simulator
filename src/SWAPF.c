@@ -50,6 +50,8 @@ void swapf(Bytecode *code){
 		
 	}
 	
+	code->absoluteAddress++;
+	
 }
 
 int check_valid_operands(Bytecode *code){

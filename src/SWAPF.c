@@ -3,7 +3,8 @@
 #include "Bytecode.h"
 #include "SWAPF.h"
 
-unsigned char FSR[0x1000];
+char FSR[0x1000];
+int PC;
 
 void swapf(Bytecode *code){
 	int swap, temp1, temp2;
@@ -50,7 +51,7 @@ void swapf(Bytecode *code){
 		
 	}
 	
-	code->absoluteAddress++;
+	PC++;
 	
 }
 
@@ -68,25 +69,32 @@ int check_valid_operands(Bytecode *code){
 
 int operand2_check(Bytecode *code){
 
-	//to check if operand 2 is placed normally
+	//to check if operand 2 not default
 	if(code->operand2 == W || code->operand2 == F || code->operand2 == 1 || code->operand2 == 0){
 		return normal_operand2(code);
 	}
 		
-	//if operand 2 is skipped 
+	//default operand2
 	else if((code->operand2 == ACCESS || code->operand2 == BANKED) && code->operand3 == -1){
-		return skipped_operand2(code);
+		return default_operand2(code);
 	}
 	
-	//if operand 2 was skipped and there are still values in operand3
+	//default operand2 and operand3
+	else if(code->operand2 == -1 && code->operand3 == -1){
+		code->operand2 = F;
+		code->operand3 = ACCESS;
+		return access_destination_operand2(code);
+	}
+		
+	//if operand 2 was default and there are still values in operand3
 	else
 		Throw(ERR_INVALID_OPERAND);
 }
 
 int normal_operand2(Bytecode *code){
 	
-	//access bank
-	if(code->operand3 == ACCESS || code->operand3 == 0){
+	//access bank or default operand3
+	if(code->operand3 == ACCESS || code->operand3 == 0 || code->operand3 == -1){
 		return access_destination_operand2(code);
 	}
 		
@@ -151,7 +159,7 @@ int banked_destination_operand2(Bytecode *code){
 	Throw(ERR_INVALID_OPERAND);
 }
 
-int skipped_operand2(Bytecode *code){	
+int default_operand2(Bytecode *code){	
 	
 	//access bank
 	if(code->operand2 == ACCESS && code->operand3 == -1){

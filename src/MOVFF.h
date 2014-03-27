@@ -3,7 +3,8 @@
 
 #define WREG  0xfe8
 
-unsigned extern char FSR[];
+extern char FSR[];
+extern int PC;
 
 void movff(Bytecode *code);
 

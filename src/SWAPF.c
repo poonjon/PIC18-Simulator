@@ -3,15 +3,13 @@
 #include "Bytecode.h"
 #include "SWAPF.h"
 
-char FSR[0x1000];
+unsigned char FSR[0x1000];
 int PC;
 
 void swapf(Bytecode *code){
-	int swap, temp1, temp2;
+	int temp1, temp2;
 	
-	swap = check_valid_operands(code);
-	
-	switch(swap){
+	switch(check_valid_operands(code)){
 	
 		case 1: //normal, access, store in wreg
 			temp1 = FSR[code->operand1]; //store fsr value in temp
@@ -36,18 +34,6 @@ void swapf(Bytecode *code){
 			temp2 = temp1;
 			FSR[code->operand1+(FSR[BSR]<<8)] = ((temp1<<4)+(temp2>>4)); //swap nibble and replace value
 			break;		
-			
-		case 5:	//default operand2, access
-			temp1 = FSR[code->operand1]; //store fsr value in temp
-			temp2 = temp1;
-			FSR[code->operand1] = (temp1<<4)+(temp2>>4); //swap nibble and store in operand1
-			break;
-			
-		case 6:	//default operand2, banked
-			temp1 = FSR[code->operand1+(FSR[BSR]<<8)]; //store value into temp
-			temp2 = temp1;
-			FSR[code->operand1+(FSR[BSR]<<8)] = ((temp1<<4)+(temp2>>4)); //swap nibble and replace value
-			break;
 		
 	}
 	
@@ -195,12 +181,3 @@ int check_operand1_range(Bytecode *code){
 		FSR[code->operand1] = temp1; //place original value into the new address
 	}
 }
-
-
-
-
-
-
-
-
-

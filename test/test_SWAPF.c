@@ -156,7 +156,7 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand2_with_bsr_5_should_pa
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
-void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -176,7 +176,7 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_t
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
-void test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -196,7 +196,7 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_excepti
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
-void test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -216,7 +216,7 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_excepti
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
-void test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -236,7 +236,7 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_excepti
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
-void test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -256,7 +256,7 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_sho
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
-void test_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception(){
+void xtest_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };

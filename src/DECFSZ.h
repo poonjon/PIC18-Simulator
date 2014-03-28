@@ -4,7 +4,7 @@
 #define WREG  0xfe8
 #define BSR   0xfe0
 
-extern char FSR[];
+unsigned extern char FSR[];
 extern int PC;
 
 void decfsz(Bytecode *code);

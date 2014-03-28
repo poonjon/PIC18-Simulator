@@ -10,7 +10,7 @@ void movff(Bytecode *code){
 
 	if(code->operand1 > -1 && code->operand1 <= 0xFFF && code->operand2 > -1 && code->operand2 < 0xFFD && code->operand2 != 0xFF9 && code->operand3 == -1){
 		FSR[code->operand2] = FSR[code->operand1];
-		PC++;
+		PC+=2;
 	}
 	
 	else 

@@ -17,12 +17,11 @@ void test_swapf_should_swap_0x12_into_0x21_save_in_wreg_access_bank_should_pass(
 	PC = code.absoluteAddress;
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
 void test_swapf_should_swap_0x12_into_0x21_save_in_file_reg_acess_bank_should_pass(){
@@ -36,12 +35,11 @@ void test_swapf_should_swap_0x12_into_0x21_save_in_file_reg_acess_bank_should_pa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX16(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX16(0x02, PC);
 }
 
 void test_swapf_should_swap_0x12_into_0x21_default_operand2_operand3_should_pass(){
@@ -55,12 +53,11 @@ void test_swapf_should_swap_0x12_into_0x21_default_operand2_operand3_should_pass
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX16(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX16(0x02, PC);
 }
 
 void test_swapf_should_swap_0x12_into_0x21_default_operand3_file_reg_should_pass(){
@@ -74,12 +71,11 @@ void test_swapf_should_swap_0x12_into_0x21_default_operand3_file_reg_should_pass
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX16(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(0, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX16(0x02, PC);
 }
 
 void test_swapf_should_swap_0x12_into_0x21_default_operand2_acess_bank_should_pass(){
@@ -93,12 +89,11 @@ void test_swapf_should_swap_0x12_into_0x21_default_operand2_acess_bank_should_pa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
 void test_swapf_should_swap_0x01_into_0x10_save_in_wreg_with_bsr_5_should_pass(){
@@ -114,12 +109,11 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_wreg_with_bsr_5_should_pass()
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
 void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_5_should_pass(){
@@ -135,12 +129,11 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_5_should_pa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
 void test_swapf_should_swap_0x01_into_0x10_default_operand2_with_bsr_5_should_pass(){
@@ -156,12 +149,11 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand2_with_bsr_5_should_pa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
 void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception(){
@@ -177,12 +169,11 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_t
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
 void test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception(){
@@ -198,12 +189,11 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_excepti
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
 void test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception(){
@@ -219,12 +209,11 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_excepti
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
 void test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception(){
@@ -240,12 +229,11 @@ void test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_excepti
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
 void test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception(){
@@ -261,12 +249,11 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_sho
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
 void test_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception(){
@@ -282,11 +269,11 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_sho
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 	
 }
 
@@ -302,12 +289,12 @@ void test_swapf_should_swap_0x12_into_0x21_should_change_operand1_0xa1_into_0xfa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX16(0xfa1, code.operand1);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX16(0xfa1, code.operand1);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -322,10 +309,10 @@ void test_swapf_should_swap_0x12_into_0x21_should_change_operand1_0xa2_into_0xfa
 	
 	Try{
 		swapf(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX16(0xfa2, code.operand1);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x21, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX16(0xfa2, code.operand1);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }

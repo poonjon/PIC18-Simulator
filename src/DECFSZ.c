@@ -18,9 +18,9 @@ void decfsz(Bytecode *code){
 			FSR[WREG] = FSR[code->operand1]; //store value in wreg
 
 			if(FSR[code->operand1] == 0) //if skip
-				PC+=2;
+				PC+=4;
 			else						 //if doesnt skip
-				PC++;
+				PC+=2;
 			
 			break;
 			
@@ -29,9 +29,9 @@ void decfsz(Bytecode *code){
 			FSR[code->operand1] = FSR[code->operand1]; //store value in file reg
 			
 			if(FSR[code->operand1] == 0) //if skip
-				PC+=2;
+				PC+=4;
 			else						 //if doesnt skip
-				PC++;
+				PC+=2;
 			
 			break;
 			
@@ -40,9 +40,9 @@ void decfsz(Bytecode *code){
 			FSR[WREG] = FSR[code->operand1+(FSR[BSR]<<8)]; //store value in wreg
 			
 			if(FSR[code->operand1+(FSR[BSR]<<8)] == 0) //if skip
-				PC+=2;
+				PC+=4;
 			else									   //if doesnt skip
-				PC++;
+				PC+=2;
 			
 			break;
 		
@@ -51,9 +51,9 @@ void decfsz(Bytecode *code){
 			FSR[code->operand1+(FSR[BSR]<<8)] = FSR[code->operand1+(FSR[BSR]<<8)]; //store value in file reg
 			
 			if(FSR[code->operand1+(FSR[BSR]<<8)] == 0) //if skip
-				PC+=2;
+				PC+=4;
 			else									   //if doesnt skip
-				PC++;
+				PC+=2;
 			
 			break;	
 		

@@ -18,12 +18,11 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x00, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-
+	TEST_ASSERT_EQUAL_HEX8(0x00, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x04, PC);
 }
 
 void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_access_should_pass(){
@@ -38,11 +37,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -58,11 +57,11 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x00, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x00, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x04, PC);
 
 }
 
@@ -78,11 +77,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -98,12 +97,12 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX16(0xfa1, code.operand1);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX16(0xfa1, code.operand1);
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -119,11 +118,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operan
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -139,11 +138,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operan
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -160,11 +159,11 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x00, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x00, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x04, PC);
 
 }
 
@@ -181,11 +180,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[WREG]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -202,11 +201,11 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x00, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x00, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x04, PC);
 
 }
 
@@ -223,11 +222,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -244,11 +243,11 @@ void test_decfsz_invalid_operand1_should_throw_exception(){
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -265,11 +264,11 @@ void test_decfsz_invalid_operand2_should_throw_exception(){
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -286,11 +285,11 @@ void test_decfsz_invalid_operand3_should_throw_exception(){
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
@@ -306,11 +305,11 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operan
 	
 	Try{
 		decfsz(&code);
-		TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-		TEST_ASSERT_EQUAL_HEX8(0x01, PC);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 

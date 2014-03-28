@@ -51,7 +51,7 @@ void swapf(Bytecode *code){
 		
 	}
 	
-	PC++;
+	PC+=2;
 	
 }
 
@@ -164,7 +164,7 @@ int default_operand2(Bytecode *code){
 	//access bank
 	if(code->operand2 == ACCESS && code->operand3 == -1){
 		check_operand1_range(code);
-		return 5;
+		return 2;
 	}
 	
 	//banked
@@ -172,7 +172,7 @@ int default_operand2(Bytecode *code){
 		
 		//to check if bsr is in range of 0 to F
 		if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
-			return 6;
+			return 4;
 		
 		//invalid bsr range
 		else

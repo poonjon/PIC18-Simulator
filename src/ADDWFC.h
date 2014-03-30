@@ -1,5 +1,5 @@
-#ifndef	__ADDWF_H__
-#define	__ADDWF_H__
+#ifndef	__ADDWFC_H__
+#define	__ADDWFC_H__
 
 #define WREG  0xfe8
 #define BSR   0xfe0
@@ -8,7 +8,7 @@
 unsigned extern char FSR[];
 extern int PC;
 
-void addwf(Bytecode *code);
+void addwfc(Bytecode *code);
 int check_valid_operands(Bytecode *code);
 int operand2_check(Bytecode *code);
 int normal_operand2(Bytecode *code);
@@ -16,11 +16,12 @@ int default_operand2(Bytecode *code);
 int access_destination_operand2(Bytecode *code);
 int banked_destination_operand2(Bytecode *code);
 int check_operand1_access_range(Bytecode *code);
-int check_status(int temp3, int temp1, int temp2);
-int check_carry(int temp1, int temp2);
-int check_digital_carry(int temp1, int temp2); 
+int check_status(int temp3, int temp1, int temp2, int temp4);
+int check_carry(int temp1, int temp2, int temp4);
+int check_digital_carry(int temp1, int temp2, int temp4); 
 int check_zero(int temp3);
 int check_negative(int temp3);
-int check_overflow(int temp1, int temp2);
-#endif	// __ADDWF_H__
+int check_overflow(int temp1, int temp2, int temp4);
+
+#endif	// __ADDWFC_H__
 

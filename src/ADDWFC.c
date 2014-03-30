@@ -1,55 +1,55 @@
 #include <stdio.h>
 #include "CException.h"
 #include "Bytecode.h"
-#include "ADDWF.h"
+#include "ADDWFC.h"
 
 unsigned char FSR[0x1000];
 int PC; 
 
-void addwf(Bytecode *code){
-	int status = 0;
-	int temp1, temp2, temp3;
+void addwfc(Bytecode *code){
+	int status;
+	int temp1, temp2, temp3, temp4;
 
 	switch(check_valid_operands(code)){
 	
 		case 1: //access, store in wreg
-			FSR[STATUS] = 0;
 			temp1 = FSR[code->operand1];
 			temp2 = FSR[WREG];
-			FSR[WREG] = FSR[code->operand1] + FSR[WREG]; //add file with wreg
+			temp4 = (FSR[STATUS]&0x1);
+			FSR[WREG] = FSR[code->operand1] + FSR[WREG] + (FSR[STATUS]&0x1); //add file with wreg
 			temp3 = FSR[WREG] ;
-			check_status(temp3, temp1, temp2);
+			check_status(temp3, temp1, temp2, temp4);
 			PC+=2;
 			
 			break;
 			
 		case 2:	//access store in file reg
-			FSR[STATUS] = 0;	
 			temp1 = FSR[code->operand1];
 			temp2 = FSR[WREG];
-			FSR[code->operand1] = FSR[code->operand1] + FSR[WREG]; //add file with wreg
+			temp4 = (FSR[STATUS]&0x1);
+			FSR[code->operand1] = FSR[code->operand1] + FSR[WREG] + (FSR[STATUS]&0x1); //add file with wreg
 			temp3 = FSR[code->operand1];
-			check_status(temp3, temp1, temp2);
+			check_status(temp3, temp1, temp2, temp4);
 			PC+=2;	
 			break;
 			
 		case 3:	//banked, store in wreg
-			FSR[STATUS] = 0;
 			temp1 = FSR[code->operand1+(FSR[BSR]<<8)];
 			temp2 = FSR[WREG];
-			FSR[WREG] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG]; //add file with wreg
+			temp4 = (FSR[STATUS]&0x1);
+			FSR[WREG] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG] + (FSR[STATUS]&0x1); //add file with wreg
 			temp3 = FSR[WREG];
-			check_status(temp3, temp1, temp2);
+			check_status(temp3, temp1, temp2, temp4);
 			PC+=2;
 			break;
 		
 		case 4:	//banked, store in file
-			FSR[STATUS] = 0;
 			temp1 = FSR[code->operand1+(FSR[BSR]<<8)];
 			temp2 = FSR[WREG];
-			FSR[code->operand1+(FSR[BSR]<<8)] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG]; //add file with wreg
+			temp4 = (FSR[STATUS]&0x1);
+			FSR[code->operand1+(FSR[BSR]<<8)] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG] + (FSR[STATUS]& 0x1); //add file with wreg
 			temp3 = FSR[code->operand1+(FSR[BSR]<<8)];
-			check_status(temp3, temp1, temp2);
+			check_status(temp3, temp1, temp2, temp4);
 			PC+=2;
 			break;
 		
@@ -198,14 +198,14 @@ int check_operand1_access_range(Bytecode *code){
 	}
 }
 
-int check_status(int temp3, int temp1, int temp2){
-	FSR[STATUS] = check_carry(temp1, temp2) | check_digital_carry(temp1, temp2) | check_zero(temp3) | check_negative(temp3) | check_overflow(temp1, temp2);
+int check_status(int temp3, int temp1, int temp2, int temp4){
+	FSR[STATUS] = check_carry(temp1, temp2, temp4) | check_digital_carry(temp1, temp2, temp4) | check_zero(temp3) | check_negative(temp3) | check_overflow(temp1, temp2, temp4) | FSR[STATUS];
 }
 
-int check_carry(int temp1, int temp2){
+int check_carry(int temp1, int temp2, int temp4){
 	int carry=0;
 
-	if(((temp1/2+1) + (temp2/2+1))-1 >= 0x80){
+	if(((temp1/2+1) + (temp2/2+1) + (temp4/2+1))-1 >= 0x80){
 		carry = 0x01;
 		return carry;
 	}
@@ -213,10 +213,10 @@ int check_carry(int temp1, int temp2){
 		return carry;
 }
 
-int check_digital_carry(int temp1, int temp2){
+int check_digital_carry(int temp1, int temp2, int temp4){
 	int digital_carry=0;
 
-	if((temp1 & 0x0f) + (temp2 & 0x0f) >= 0x10 ){
+	if((temp1 & 0x0f) + (temp2 & 0x0f) + (temp4 & 0x0f) >= 0x10 ){
 		digital_carry = 0x02;
 		return digital_carry;
 	}
@@ -238,7 +238,7 @@ int check_zero(int temp3){
 int check_negative(int temp3){
 	int negative=0;
 	
-	if(temp3 & 0x80 != 0){
+	if((temp3 & 0x80) != 0){
 		negative = 0x10;
 		return negative;
 	}
@@ -246,10 +246,10 @@ int check_negative(int temp3){
 		return negative;
 }
 
-int check_overflow(int temp1, int temp2){
+int check_overflow(int temp1, int temp2, int temp4){
 	int overflow=0;
 
-	if(((temp1/2+1) + (temp2/2+1))-1 >= 0x80){
+	if(((temp1/2+1) + (temp2/2+1) + (temp4/2+1))-1 >= 0x80){
 		overflow = 0x08;
 		return overflow;
 	}

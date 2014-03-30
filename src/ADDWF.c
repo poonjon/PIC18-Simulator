@@ -7,30 +7,51 @@ unsigned char FSR[0x1000];
 int PC; 
 
 void addwf(Bytecode *code){
+	int status = 0;
+	int temp1, temp2, temp3;
 
 	switch(check_valid_operands(code)){
 	
 		case 1: //access, store in wreg
+			FSR[STATUS] = 0;
+			temp1 = FSR[code->operand1];
+			temp2 = FSR[WREG];
 			FSR[WREG] = FSR[code->operand1] + FSR[WREG]; //add file with wreg
+			temp3 = FSR[WREG] ;
+			check_status(temp3, temp1, temp2);
 			PC+=2;
+			
 			break;
 			
 		case 2:	//access store in file reg
+			FSR[STATUS] = 0;	
+			temp1 = FSR[code->operand1];
+			temp2 = FSR[WREG];
 			FSR[code->operand1] = FSR[code->operand1] + FSR[WREG]; //add file with wreg
-			PC+=2;			
+			temp3 = FSR[code->operand1];
+			check_status(temp3, temp1, temp2);
+			PC+=2;	
 			break;
 			
 		case 3:	//banked, store in wreg
+			FSR[STATUS] = 0;
+			temp1 = FSR[code->operand1+(FSR[BSR]<<8)];
+			temp2 = FSR[WREG];
 			FSR[WREG] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG]; //add file with wreg
+			temp3 = FSR[WREG];
+			check_status(temp3, temp1, temp2);
 			PC+=2;
 			break;
 		
 		case 4:	//banked, store in file
+			FSR[STATUS] = 0;
+			temp1 = FSR[code->operand1+(FSR[BSR]<<8)];
+			temp2 = FSR[WREG];
 			FSR[code->operand1+(FSR[BSR]<<8)] = FSR[code->operand1+(FSR[BSR]<<8)] + FSR[WREG]; //add file with wreg
+			temp3 = FSR[code->operand1+(FSR[BSR]<<8)];
+			check_status(temp3, temp1, temp2);
 			PC+=2;
 			break;
-			
-			break;	
 		
 	}
 	
@@ -94,13 +115,13 @@ int access_destination_operand2(Bytecode *code){
 	
 	//destination WREG
 	if(code->operand2 == W || code->operand2 == 0){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 1;
 	}
 	
 	//destination in file reg
 	else if(code->operand2 == F || code->operand2 == 1){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 2;
 	}
 	
@@ -144,7 +165,7 @@ int default_operand2(Bytecode *code){
 	
 	//access bank
 	if(code->operand2 == ACCESS && code->operand3 == -1){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 2;
 	}
 	
@@ -166,7 +187,7 @@ int default_operand2(Bytecode *code){
 
 }
 
-int check_operand1_range(Bytecode *code){
+int check_operand1_access_range(Bytecode *code){
 
 	if(code->operand1 >= 0x80 && code->operand1 <= 0xFF){
 		int temp1;
@@ -175,6 +196,66 @@ int check_operand1_range(Bytecode *code){
 		code->operand1 = code->operand1 | 0xf00;  //change addresses that are >= than 0x80 into  0xfxx
 		FSR[code->operand1] = temp1; //place original value into the new address
 	}
+}
+
+int check_status(int temp3, int temp1, int temp2){
+	FSR[STATUS] = check_carry(temp1, temp2) | check_digital_carry(temp1, temp2) | check_zero(temp3) | check_negative(temp3) | check_overflow(temp1, temp2);
+}
+
+int check_carry(int temp1, int temp2){
+	int carry=0;
+
+	if(((temp1/2+1) + (temp2/2+1))-1 >= 0x80){
+		carry = 0x01;
+		return carry;
+	}
+	else 
+		return carry;
+}
+
+int check_digital_carry(int temp1, int temp2){
+	int digital_carry=0;
+
+	if((temp1 & 0x0f) + (temp2 & 0x0f) >= 0x10 ){
+		digital_carry = 0x02;
+		return digital_carry;
+	}
+	else 
+		return digital_carry;
+}
+
+int check_zero(int temp3){
+	int zero=0;
+
+	if(temp3 == 0){
+		zero = 0x04;
+		return zero;
+	}
+	else 
+		return zero;
+}
+
+int check_negative(int temp3){
+	int negative=0;
+	
+	if(temp3 & 0x80 != 0){
+		negative = 0x10;
+		return negative;
+	}
+	else 
+		return negative;
+}
+
+int check_overflow(int temp1, int temp2){
+	int overflow=0;
+
+	if(((temp1/2+1) + (temp2/2+1))-1 >= 0x80){
+		overflow = 0x08;
+		return overflow;
+	}
+	
+	else 
+		return overflow;
 }
 
 

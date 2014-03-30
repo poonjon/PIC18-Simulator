@@ -231,7 +231,7 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 
 }
 
-void xtest_decfsz_invalid_operand1_should_throw_exception(){
+void test_decfsz_invalid_operand1_should_throw_exception(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -241,19 +241,16 @@ void xtest_decfsz_invalid_operand1_should_throw_exception(){
 	FSR[code.operand1+(FSR[BSR]<<8)] = 0x02;
 	code.absoluteAddress = 0x00;
 	PC = code.absoluteAddress;
-	printf("%x\n",code.operand1);
+
 	Try{
 		decfsz(&code);
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	
-	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 
 }
 
-void xtest_decfsz_invalid_operand2_should_throw_exception(){
+void test_decfsz_invalid_operand2_should_throw_exception(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -269,12 +266,11 @@ void xtest_decfsz_invalid_operand2_should_throw_exception(){
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 
 }
 
-void xtest_decfsz_invalid_operand3_should_throw_exception(){
+void test_decfsz_invalid_operand3_should_throw_exception(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -290,12 +286,11 @@ void xtest_decfsz_invalid_operand3_should_throw_exception(){
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 
 }
 
-void xtest_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operand2_invalid_operand3_should_throw_exception(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operand2_invalid_operand3_should_throw_exception(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -310,8 +305,7 @@ void xtest_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_opera
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x01, FSR[code.operand1]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 
 }
 

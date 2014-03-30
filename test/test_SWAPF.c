@@ -156,7 +156,7 @@ void test_swapf_should_swap_0x01_into_0x10_default_operand2_with_bsr_5_should_pa
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -172,11 +172,10 @@ void xtest_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
+	
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -192,11 +191,10 @@ void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_except
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
+	
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -212,11 +210,10 @@ void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_except
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -232,11 +229,10 @@ void xtest_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_except
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -252,11 +248,10 @@ void xtest_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_sh
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
+
 }
 
-void xtest_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception(){
+void test_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception(){
 	
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -272,8 +267,7 @@ void xtest_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_sh
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
-	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 	
 }
 

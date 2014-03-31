@@ -9,10 +9,8 @@ extern int PC;
 
 void btfsc(Bytecode *code);
 int check_valid_operands(Bytecode *code);
-int operand2_check(Bytecode *code);
-int normal_operand2(Bytecode *code);
-int default_operand2(Bytecode *code);
-int access_destination_operand2(Bytecode *code);
-int banked_destination_operand2(Bytecode *code);
+int check_operand3(Bytecode *code);
+void check_operand1_access_range(Bytecode *code);
+int check_operand2(Bytecode *code, int value);
 
 #endif // BTFSC_H

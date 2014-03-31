@@ -14,6 +14,6 @@ int normal_operand2(Bytecode *code);
 int default_operand2(Bytecode *code);
 int access_destination_operand2(Bytecode *code);
 int banked_destination_operand2(Bytecode *code);
-int check_operand1_range(Bytecode *code);
+void check_operand1_range(Bytecode *code);
 
 #endif	// __SWAPF_H__

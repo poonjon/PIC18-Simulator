@@ -56,7 +56,7 @@ int check_valid_operands(Bytecode *code){
 	if(code->operand1 > -1 && code->operand1 <= 0xFF)
 		return operand2_check(code);
 	
-	//values in operand 1 and 2 are invalid
+	//values in operand 1 is invalid
 	else 
 		Throw(ERR_INVALID_OPERAND);
 
@@ -180,8 +180,8 @@ int default_operand2(Bytecode *code){
 
 }
 
-int check_operand1_access_range(Bytecode *code){
-
+void check_operand1_access_range(Bytecode *code){
+	
 	if(code->operand1 >= 0x80 && code->operand1 <= 0xFF){
 		int temp1;
 		

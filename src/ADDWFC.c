@@ -187,7 +187,7 @@ int default_operand2(Bytecode *code){
 
 }
 
-int check_operand1_access_range(Bytecode *code){
+void check_operand1_access_range(Bytecode *code){
 
 	if(code->operand1 >= 0x80 && code->operand1 <= 0xFF){
 		int temp1;

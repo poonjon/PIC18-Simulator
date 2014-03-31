@@ -17,7 +17,8 @@ typedef enum {
 	MOVFF,
 	SWAPF,
 	DECFSZ,
-	ADDWFC
+	ADDWFC,
+	RLCF
 } Mnemonic;
 				
 typedef struct {

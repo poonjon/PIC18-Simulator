@@ -13,19 +13,37 @@ void rlcf(Bytecode *code){
 	switch(check_valid_operands(code)){
 	
 		case 1: //access, store in wreg
-
+			FSR[WREG] = (FSR[code->operand1]<<1)|FSR[STATUS];
+			temp2 = FSR[WREG];
+			FSR[STATUS] = FSR[code->operand1]>>7; 
+			check_status(temp2);
+			PC +=2;
 			break;
 			
 		case 2:	//access store in file reg
-
+			temp1 = FSR[code->operand1];
+			FSR[code->operand1] = (FSR[code->operand1]<<1)|FSR[STATUS];
+			temp2 = FSR[code->operand1];
+			FSR[STATUS] = temp1>>7; 
+			check_status(temp2);
+			PC +=2;
 			break;
 			
 		case 3:	//banked, store in wreg
-
+			FSR[WREG] = (FSR[code->operand1+(FSR[BSR]<<8)]<<1)|FSR[STATUS];
+			temp2 = FSR[WREG];
+			FSR[STATUS] = FSR[code->operand1+(FSR[BSR]<<8)]>>7; 
+			check_status(temp2);
+			PC +=2;
 			break;
 		
 		case 4:	//banked, store in file
-
+			temp1 = FSR[code->operand1+(FSR[BSR]<<8)];
+			FSR[code->operand1+(FSR[BSR]<<8)] = (FSR[code->operand1+(FSR[BSR]<<8)]<<1)|FSR[STATUS];
+			temp2 = FSR[code->operand1+(FSR[BSR]<<8)];
+			FSR[STATUS] = temp1>>7; 
+			check_status(temp2);
+			PC +=2;
 			break;
 		
 	}
@@ -172,3 +190,40 @@ int check_operand1_access_range(Bytecode *code){
 		FSR[code->operand1] = temp1; //place original value into the new address
 	}
 }
+
+int check_status(int temp2){
+	FSR[STATUS] = check_zero(temp2) | check_negative(temp2) | FSR[STATUS];
+
+}
+
+int check_zero(int temp2){
+	int zero=0;
+	
+	if(temp2 == 0 ){
+		zero = 0x4;
+		return zero;
+	}
+	
+	return zero;
+
+}
+
+int check_negative(int temp2){
+	int negative=0;
+	
+	if((temp2 & 0x80) !=  0){
+		negative = 0x10;
+		return negative;
+	}
+	
+	return negative;
+
+}
+
+
+
+
+
+
+
+

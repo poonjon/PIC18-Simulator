@@ -72,6 +72,28 @@ void test_rlcf_11000000_with_carry_1_should_get_10000001_status_0x11_store_in_fi
 	TEST_ASSERT_EQUAL(0x02, PC);
 }
 
+void test_rlcf_00000000_with_carry_0_should_get_00000000_status_0x11_store_in_file_access_should_pass(){
+	int error;	
+	
+	Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xff2, .operand2 = ACCESS, .operand3 = -1};
+	
+	FSR[STATUS] = 0x0;
+	FSR[code.operand1] = 0b0000000;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		rlcf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	
+	TEST_ASSERT_EQUAL(0b00000000, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL(0b00000100, FSR[STATUS]);
+	TEST_ASSERT_EQUAL(0x02, PC);
+}
+
 void test_rlcf_10000000_with_carry_1_should_get_00000000_status_0x05_store_in_file_f92_access_should_pass(){
 	int error;	
 	
@@ -114,6 +136,29 @@ void test_rlcf_10100110_with_carry_1_should_get_01001101_status_0x01_store_in_wr
 	
 	TEST_ASSERT_EQUAL(0b01001101, FSR[WREG]);
 	TEST_ASSERT_EQUAL(0b00000001, FSR[STATUS]);
+	TEST_ASSERT_EQUAL(0x02, PC);
+}
+
+void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x01_store_in_wreg_banked_should_pass(){
+	int error;	
+	
+	Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xf97, .operand2 = W, .operand3 = BANKED};
+	
+	FSR[STATUS] = 1;
+	FSR[BSR] = 0x5;
+	FSR[code.operand1] = 0b11111111;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		rlcf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	
+	TEST_ASSERT_EQUAL(0b11111111, FSR[WREG]);
+	TEST_ASSERT_EQUAL(0b00010001, FSR[STATUS]);
 	TEST_ASSERT_EQUAL(0x02, PC);
 }
 

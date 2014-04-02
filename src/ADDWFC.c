@@ -60,7 +60,7 @@ void addwfc(Bytecode *code){
 int check_valid_operands(Bytecode *code){
 	
 	//to check if the values are in range for operand 1 
-	if(code->operand1 > -1 && code->operand1 <= 0xFF)
+	if(code->operand1 > -1 && code->operand1 <= 0xFF || (code->operand1 >= 0xf80 && code->operand1 <= 0xfff))
 		return operand2_check(code);
 	
 	//values in operand 1 and 2 are invalid
@@ -135,9 +135,13 @@ int banked_destination_operand2(Bytecode *code){
 	
 	//destination WREG
 	if(code->operand2 == W || code->operand2 == 0){
-				
+		
+		//check if operand1 is SFR, ignore bsr
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 1;
+		
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 3;
 					
 		//invalid bsr range
@@ -147,9 +151,13 @@ int banked_destination_operand2(Bytecode *code){
 				
 	//destination file reg
 	else if(code->operand2 == F || code->operand2 == 1){
-				
+		
+		//check if operand1 is SFR, ignore bsr
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 2;
+		
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 				
 		else
@@ -163,7 +171,7 @@ int banked_destination_operand2(Bytecode *code){
 
 int default_operand2(Bytecode *code){	
 	
-	//access bank
+	//access 
 	if(code->operand2 == ACCESS && code->operand3 == -1){
 		check_operand1_access_range(code);
 		return 2;
@@ -172,8 +180,12 @@ int default_operand2(Bytecode *code){
 	//banked
 	else if(code->operand2 == BANKED && code->operand3 == -1){
 		
+		//check if operand1 is SFR, ignore bsr 
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 2;
+		
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 		
 		//invalid bsr range
@@ -247,13 +259,19 @@ int check_negative(int temp3){
 }
 
 int check_overflow(int temp1, int temp2, int temp4){
-	int overflow=0;
+	int overflow=0, d6_carry=0, d7_carry=0;
 
-	if(((temp1/2+1) + (temp2/2+1) + (temp4/2+1))-1 >= 0x80){
-		overflow = 0x08;
+	d6_carry = ((temp1&0x7f) + (temp2&0x7f) + temp4)>>7;
+	d7_carry = (temp1+temp2+temp4)>>8;
+	
+	if(d6_carry == 1 && d7_carry == 1){ //d7 no carry, d6 carry
+		overflow = 0x0;
 		return overflow;
 	}
-	
+	else if((d7_carry != 1 && d6_carry == 1)||(d7_carry == 1 && d6_carry != 1)){ //d7 no carry, d6 carry
+		overflow = 0x8;
+		return overflow;
+	}
 	else 
 		return overflow;
 }

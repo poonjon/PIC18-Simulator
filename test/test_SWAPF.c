@@ -42,6 +42,24 @@ void test_swapf_should_swap_0x12_into_0x21_save_in_file_reg_acess_bank_should_pa
 	TEST_ASSERT_EQUAL_HEX16(0x02, PC);
 }
 
+void test_swapf_should_swap_0x13_into_0x21_save_in_file_reg_acess_bank_should_pass(){
+	int error;
+	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xff0, .operand2 = 1, .operand3 = ACCESS};
+	
+	FSR[code.operand1] = 0x13;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		swapf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0x31, FSR[0xff0]);
+	TEST_ASSERT_EQUAL_HEX16(0x02, PC);
+}
+
 void test_swapf_should_swap_0x12_into_0x21_default_operand2_operand3_should_pass(){
 	int error;
 	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
@@ -96,6 +114,24 @@ void test_swapf_should_swap_0x12_into_0x21_default_operand2_acess_bank_should_pa
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
+void test_swapf_should_swap_0x51_into_0x15_default_operand2_acess_bank_should_pass(){
+	int error;
+	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xff3, .operand2 = ACCESS, .operand3 = -1};
+	
+	FSR[code.operand1] = 0x51;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress; 
+	
+	Try{
+		swapf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0x15, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+}
+
 void test_swapf_should_swap_0x01_into_0x10_save_in_wreg_with_bsr_5_should_pass(){
 	
 	int error;
@@ -116,6 +152,26 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_wreg_with_bsr_5_should_pass()
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
 }
 
+void test_swapf_should_swap_0x11_into_0x11_save_in_wreg_with_bsr_5_should_pass(){
+	
+	int error;
+	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xfa3, .operand2 = 0, .operand3 = BANKED};
+	
+	FSR[BSR] = 0x5;
+	FSR[code.operand1] = 0x11;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		swapf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0x11, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+}
+
 void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_5_should_pass(){
 	
 	int error;
@@ -133,6 +189,26 @@ void test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_5_should_pa
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
 	TEST_ASSERT_EQUAL_HEX8(0x10, FSR[code.operand1+(FSR[BSR]<<8)]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
+}
+
+void test_swapf_should_swap_0x04_into_0x40_save_in_file_reg_with_bsr_5_should_pass(){
+	
+	int error;
+	Instruction inst = { .mnemonic = SWAPF, .name = "swapf" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xfa1, .operand2 = F, .operand3 = BANKED};
+	
+	FSR[BSR] = 0x5;
+	FSR[code.operand1] = 0x04;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		swapf(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0x40, FSR[0xfa1]);
 	TEST_ASSERT_EQUAL_HEX8(0x02, PC);	
 }
 

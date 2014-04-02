@@ -1,0 +1,73 @@
+---
+:source:
+  :path: test
+  :file: test_SWAPF.c
+:successes:
+- :test: test_swapf_should_swap_0x12_into_0x21_save_in_wreg_access_bank_should_pass
+  :line: 9
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_save_in_file_reg_acess_bank_should_pass
+  :line: 27
+  :message: ''
+- :test: test_swapf_should_swap_0x13_into_0x21_save_in_file_reg_acess_bank_should_pass
+  :line: 45
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_default_operand2_operand3_should_pass
+  :line: 63
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_default_operand3_file_reg_should_pass
+  :line: 81
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_default_operand2_acess_bank_should_pass
+  :line: 99
+  :message: ''
+- :test: test_swapf_should_swap_0x51_into_0x15_default_operand2_acess_bank_should_pass
+  :line: 117
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_save_in_wreg_with_bsr_5_should_pass
+  :line: 135
+  :message: ''
+- :test: test_swapf_should_swap_0x11_into_0x11_save_in_wreg_with_bsr_5_should_pass
+  :line: 155
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_5_should_pass
+  :line: 175
+  :message: ''
+- :test: test_swapf_should_swap_0x04_into_0x40_save_in_file_reg_with_bsr_5_should_pass
+  :line: 195
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_default_operand2_with_bsr_5_should_pass
+  :line: 215
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_save_in_file_reg_with_bsr_15_should_throw_exception
+  :line: 235
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_invalid_operand1_should_throw_exception
+  :line: 254
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_invalid_operand2_should_throw_exception
+  :line: 273
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_invalid_operand3_should_throw_exception
+  :line: 292
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_default_operand2_invalid_operand3_should_throw_exception
+  :line: 311
+  :message: ''
+- :test: test_swapf_should_swap_0x01_into_0x10_default_operand3_invalid_operand2_should_throw_exception
+  :line: 330
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_should_change_operand1_0xa1_into_0xfa1_save_in_wreg_access_bank_should_pass
+  :line: 350
+  :message: ''
+- :test: test_swapf_should_swap_0x12_into_0x21_should_change_operand1_0xa2_into_0xfa2_save_in_wreg_access_bank_should_pass
+  :line: 371
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 20
+  :passed: 20
+  :failed: 0
+  :ignored: 0
+:stdout: []

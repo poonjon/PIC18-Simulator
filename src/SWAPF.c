@@ -44,7 +44,7 @@ void swapf(Bytecode *code){
 int check_valid_operands(Bytecode *code){
 	
 	//to check if the values are in range for operand 1 
-	if(code->operand1 > -1 && code->operand1 <= 0xFF)
+	if(code->operand1 > -1 && code->operand1 <= 0xFF || (code->operand1 >= 0xf80 && code->operand1 <= 0xfff))
 		return operand2_check(code);
 	
 	//values in operand 1 and 2 are invalid
@@ -99,13 +99,13 @@ int access_destination_operand2(Bytecode *code){
 	
 	//destination WREG
 	if(code->operand2 == W || code->operand2 == 0){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 1;
 	}
 	
 	//destination in file reg
 	else if(code->operand2 == F || code->operand2 == 1){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 2;
 	}
 	
@@ -119,9 +119,13 @@ int banked_destination_operand2(Bytecode *code){
 	
 	//destination WREG
 	if(code->operand2 == W || code->operand2 == 0){
-				
+		
+		//check if SFR, ignore bsr
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 1;
+		
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 3;
 					
 		//invalid bsr range
@@ -131,9 +135,13 @@ int banked_destination_operand2(Bytecode *code){
 				
 	//destination file reg
 	else if(code->operand2 == F || code->operand2 == 1){
-				
+		
+		//check if SFR, ignore bsr
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 2;
+
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 				
 		else
@@ -149,15 +157,19 @@ int default_operand2(Bytecode *code){
 	
 	//access bank
 	if(code->operand2 == ACCESS && code->operand3 == -1){
-		check_operand1_range(code);
+		check_operand1_access_range(code);
 		return 2;
 	}
 	
 	//banked
 	else if(code->operand2 == BANKED && code->operand3 == -1){
 		
+		//check if SFR, ignore bsr
+		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
+			return 2;
+		
 		//to check if bsr is in range of 0 to F
-		if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
+		else if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 		
 		//invalid bsr range
@@ -171,7 +183,7 @@ int default_operand2(Bytecode *code){
 
 }
 
-void check_operand1_range(Bytecode *code){
+void check_operand1_access_range(Bytecode *code){
 
 	if(code->operand1 >= 0x80 && code->operand1 <= 0xFF){
 		int temp1;

@@ -6,7 +6,7 @@
 void setUp() {}
 void tearDown() {}
 
-void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_access_should_pass(){
+void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_4_store_in_wreg_access_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -25,7 +25,7 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_
 	TEST_ASSERT_EQUAL_HEX8(0x04, PC);
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_access_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_store_in_wreg_access_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -45,7 +45,7 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_
 
 }
 
-void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_reg_access_should_pass(){
+void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_4_store_in_file_reg_access_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -65,7 +65,7 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_reg_access_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_store_in_file_reg_access_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -85,7 +85,27 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_reg_access_address_0xa1_should_change_to_0xfa1_pass(){
+void test_decfsz_should_decrement_value_0x00_expect_0xff_pc_add_2_store_in_file_reg_access_should_pass(){
+	int error;	
+	
+	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xf89, .operand2 = F, .operand3 = ACCESS};
+
+	FSR[code.operand1] = 0x0;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		decfsz(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0xff, FSR[code.operand1]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
+}
+
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_store_in_file_reg_access_address_0xa1_should_change_to_0xfa1_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -107,7 +127,7 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operand2_access_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_default_operand2_access_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -127,7 +147,7 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operan
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operand2_operand3_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_default_operand2_operand3_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -147,7 +167,7 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operan
 
 }
 
-void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_bsr_5_should_pass(){
+void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_4_store_in_wreg_bsr_5_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -168,7 +188,7 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_wreg_
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_bsr_5_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_store_in_wreg_bsr_5_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -189,7 +209,28 @@ void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_wreg_
 
 }
 
-void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_bsr_5_should_pass(){
+void test_decfsz_should_decrement_value_0x10_expect_0x0f_pc_add_2_store_in_wreg_bsr_5_should_pass(){
+	int error;	
+	
+	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
+	Bytecode code = {.instruction = &inst, .operand1 = 0xf92, .operand2 = W, .operand3 = BANKED};
+
+	FSR[BSR] = 0x05;
+	FSR[code.operand1] = 0x10;
+	code.absoluteAddress = 0x00;
+	PC = code.absoluteAddress;
+	
+	Try{
+		decfsz(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
+	TEST_ASSERT_EQUAL_HEX8(0x0f, FSR[WREG]);
+	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
+}
+
+void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_4_store_in_file_bsr_5_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -210,7 +251,7 @@ void test_decfsz_should_decrement_value_0x01_expect_0x00_pc_add_2_store_in_file_
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_store_in_file_bsr_5_should_pass(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_store_in_file_bsr_5_should_pass(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
@@ -290,7 +331,7 @@ void test_decfsz_invalid_operand3_should_throw_exception(){
 
 }
 
-void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_1_default_operand2_invalid_operand3_should_throw_exception(){
+void test_decfsz_should_decrement_value_0x02_expect_0x01_pc_add_2_default_operand2_invalid_operand3_should_throw_exception(){
 	int error;	
 	
 	Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };

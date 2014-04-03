@@ -14,7 +14,8 @@ typedef enum {
 } ExceptionError;
 
 typedef enum {
-	PUSH
+	PUSH,
+	BZ
 } Mnemonic;
 				
 typedef struct {

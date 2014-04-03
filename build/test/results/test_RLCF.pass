@@ -4,43 +4,43 @@
   :file: test_RLCF.c
 :successes:
 - :test: test_rlcf_00000000_with_carry_1_should_get_00000001_status_0x00_store_in_wreg_access_should_pass
-  :line: 9
+  :line: 10
   :message: ''
 - :test: test_rlcf_10000000_with_carry_1_should_get_00000001_status_0x01_store_in_file_access_should_pass
-  :line: 31
+  :line: 29
   :message: ''
 - :test: test_rlcf_11000000_with_carry_1_should_get_10000001_status_0x11_store_in_file_access_should_pass
-  :line: 53
+  :line: 48
   :message: ''
 - :test: test_rlcf_00000000_with_carry_0_should_get_00000000_status_0x11_store_in_file_access_should_pass
-  :line: 75
+  :line: 67
   :message: ''
 - :test: test_rlcf_10000000_with_carry_1_should_get_00000000_status_0x05_store_in_file_f92_access_should_pass
-  :line: 97
+  :line: 86
   :message: ''
 - :test: test_rlcf_10100110_with_carry_1_should_get_01001101_status_0x01_store_in_wreg_banked_should_pass
-  :line: 119
+  :line: 105
   :message: ''
-- :test: test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x01_store_in_wreg_banked_should_pass
-  :line: 142
+- :test: test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x11_store_in_wreg_banked_should_pass
+  :line: 125
   :message: ''
 - :test: test_rlcf_01110110_with_carry_0_should_get_11101100_status_0x01_store_in_wreg_banked_should_pass
-  :line: 165
+  :line: 145
   :message: ''
 - :test: test_rlcf_01001111_with_carry_0_should_get_10011110_status_0x10_store_in_file_banked_should_pass
-  :line: 188
+  :line: 165
   :message: ''
 - :test: test_rlcf_00001111_with_carry_0_should_get_00011110_status_0x00_store_in_file_banked_should_pass
-  :line: 211
+  :line: 185
   :message: ''
 - :test: test_rlcf_invalid_operand1_should_throw_exception
-  :line: 234
+  :line: 205
   :message: ''
 - :test: test_rlcf_invalid_operand2_should_throw_exception
-  :line: 253
+  :line: 222
   :message: ''
 - :test: test_rlcf_invalid_operand3_should_throw_exception
-  :line: 272
+  :line: 239
   :message: ''
 :failures: []
 :ignores: []

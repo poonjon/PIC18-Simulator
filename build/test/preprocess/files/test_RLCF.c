@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "RLCF.h"
+#include "Execute.h"
 #include "CException.h"
 #include "Bytecode.h"
 
@@ -26,10 +27,6 @@ void test_rlcf_00000000_with_carry_1_should_get_00000001_status_0x00_store_in_wr
 
  FSR[code.operand1] = 0b00000000;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -38,17 +35,15 @@ void test_rlcf_00000000_with_carry_1_should_get_00000001_status_0x00_store_in_wr
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)23, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)22, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b00000001)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)26, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000001)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)25, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)27, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)28, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)26, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -70,10 +65,6 @@ void test_rlcf_10000000_with_carry_1_should_get_00000001_status_0x01_store_in_fi
 
  FSR[code.operand1] = 0b10000000;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -82,17 +73,15 @@ void test_rlcf_10000000_with_carry_1_should_get_00000001_status_0x01_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)45, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)41, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b0000001)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)48, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b0000001)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)44, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b0000001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)49, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)50, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b0000001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)45, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -114,10 +103,6 @@ void test_rlcf_11000000_with_carry_1_should_get_10000001_status_0x11_store_in_fi
 
  FSR[code.operand1] = 0b11000000;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -126,17 +111,15 @@ void test_rlcf_11000000_with_carry_1_should_get_10000001_status_0x11_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)67, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)60, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b10000001)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)70, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b10000001)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)63, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)71, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)72, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)64, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -158,10 +141,6 @@ void test_rlcf_00000000_with_carry_0_should_get_00000000_status_0x11_store_in_fi
 
  FSR[code.operand1] = 0b0000000;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -170,17 +149,15 @@ void test_rlcf_00000000_with_carry_0_should_get_00000000_status_0x11_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)89, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)79, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)92, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)82, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00000100)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)93, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)94, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000100)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)83, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -202,10 +179,6 @@ void test_rlcf_10000000_with_carry_1_should_get_00000000_status_0x05_store_in_fi
 
  FSR[code.operand1] = 0b10000000;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -214,17 +187,15 @@ void test_rlcf_10000000_with_carry_1_should_get_00000000_status_0x05_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)111, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)98, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b0000000)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)114, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b0000000)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)101, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b0000101)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)115, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)116, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b0000101)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)102, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -248,10 +219,6 @@ void test_rlcf_10100110_with_carry_1_should_get_01001101_status_0x01_store_in_wr
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b10100110;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -260,23 +227,21 @@ void test_rlcf_10100110_with_carry_1_should_get_01001101_status_0x01_store_in_wr
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)134, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)118, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b01001101)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)137, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b01001101)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)121, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00000001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)138, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)139, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)122, UNITY_DISPLAY_STYLE_INT);
 
 }
 
 
 
-void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x01_store_in_wreg_banked_should_pass(){
+void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x11_store_in_wreg_banked_should_pass(){
 
  int error;
 
@@ -292,11 +257,7 @@ void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x01_store_in_wr
 
  FSR[0xfe0] = 0x5;
 
- FSR[code.operand1] = 0b11111111;
-
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
+ FSR[code.operand1] = 0xff;
 
 
 
@@ -306,17 +267,15 @@ void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x01_store_in_wr
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)157, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)138, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b11111111)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)160, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b11111111)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)141, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)161, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)162, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)142, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -340,10 +299,6 @@ void test_rlcf_01110110_with_carry_0_should_get_11101100_status_0x01_store_in_wr
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b01110110;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -352,17 +307,15 @@ void test_rlcf_01110110_with_carry_0_should_get_11101100_status_0x01_store_in_wr
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)180, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)158, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b11101100)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)183, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b11101100)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)161, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00010000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)184, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)185, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00010000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)162, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -386,10 +339,6 @@ void test_rlcf_01001111_with_carry_0_should_get_10011110_status_0x10_store_in_fi
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b01001111;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -398,17 +347,15 @@ void test_rlcf_01001111_with_carry_0_should_get_10011110_status_0x10_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)203, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)178, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b10011110)), (_U_SINT)((FSR[(FSR[0xfe0]<<8)+code.operand1])), (((void *)0)), (_U_UINT)206, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b10011110)), (_U_SINT)((FSR[(FSR[0xfe0]<<8)+code.operand1])), (((void *)0)), (_U_UINT)181, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00010000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)207, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)208, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00010000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)182, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -432,10 +379,6 @@ void test_rlcf_00001111_with_carry_0_should_get_00011110_status_0x00_store_in_fi
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b00001111;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -444,17 +387,15 @@ void test_rlcf_00001111_with_carry_0_should_get_00011110_status_0x00_store_in_fi
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)226, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)198, UNITY_DISPLAY_STYLE_INT);
 
  }
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b00011110)), (_U_SINT)((FSR[(FSR[0xfe0]<<8)+code.operand1])), (((void *)0)), (_U_UINT)229, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00011110)), (_U_SINT)((FSR[(FSR[0xfe0]<<8)+code.operand1])), (((void *)0)), (_U_UINT)201, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)230, UNITY_DISPLAY_STYLE_INT);
-
- UnityAssertEqualNumber((_U_SINT)((0x02)), (_U_SINT)((PC)), (((void *)0)), (_U_UINT)231, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0b00000000)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)202, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -468,7 +409,7 @@ void test_rlcf_invalid_operand1_should_throw_exception(){
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x123, .operand2 = F, .operand3 = BANKED};
+ Bytecode code = {.instruction = &inst, .operand1 = -123, .operand2 = F, .operand3 = BANKED};
 
 
 
@@ -478,10 +419,6 @@ void test_rlcf_invalid_operand1_should_throw_exception(){
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b01001111;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -490,7 +427,7 @@ void test_rlcf_invalid_operand1_should_throw_exception(){
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)249, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)218, UNITY_DISPLAY_STYLE_INT);
 
  }
 
@@ -516,10 +453,6 @@ void test_rlcf_invalid_operand2_should_throw_exception(){
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b01001111;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -528,7 +461,7 @@ void test_rlcf_invalid_operand2_should_throw_exception(){
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)268, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)235, UNITY_DISPLAY_STYLE_INT);
 
  }
 
@@ -554,10 +487,6 @@ void test_rlcf_invalid_operand3_should_throw_exception(){
 
  FSR[(FSR[0xfe0]<<8)+code.operand1] = 0b01001111;
 
- code.absoluteAddress = 0x00;
-
- PC = code.absoluteAddress;
-
 
 
  { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[(0)].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); if (_setjmp(NewFrame) == 0) { if (&PrevFrame){
@@ -566,10 +495,8 @@ void test_rlcf_invalid_operand3_should_throw_exception(){
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)287, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)252, UNITY_DISPLAY_STYLE_INT);
 
  }
-
-
 
 }

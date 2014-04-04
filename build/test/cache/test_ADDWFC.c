@@ -95,7 +95,7 @@ void test_addwfc_should_add_0x02_to_0x01_expect_0x03_save_in_file_access_should_
 
  Instruction inst = { .mnemonic = ADDWFC, .name = "addwfc" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0xf90, .operand2 = F, .operand3 = ACCESS};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x190, .operand2 = F, .operand3 = -1};
 
 
 
@@ -119,7 +119,7 @@ void test_addwfc_should_add_0x02_to_0x01_expect_0x03_save_in_file_access_should_
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0x03)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)64, UNITY_DISPLAY_STYLE_INT);
+ UnityAssertEqualNumber((_U_SINT)((0x03)), (_U_SINT)((FSR[code.operand1+(FSR[0xfe0]<<8)])), (((void *)0)), (_U_UINT)64, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -561,9 +561,9 @@ void test_addwfc_should_add_0x03_to_0x01_expect_0x04_save_in_file_bsr_5_status_0
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0x04)), (_U_SINT)((FSR[code.operand1])), (((void *)0)), (_U_UINT)285, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0x00)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)286, UNITY_DISPLAY_STYLE_INT);
+
+
 
 }
 
@@ -729,9 +729,9 @@ void test_addwfc_should_add_0x0a_to_0x0a_with_carry_expect_0x15_default_operand2
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0x15)), (_U_SINT)((FSR[0xf91])), (((void *)0)), (_U_UINT)369, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00000011)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)370, UNITY_DISPLAY_STYLE_INT);
+
+
 
 }
 

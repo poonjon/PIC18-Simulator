@@ -99,7 +99,7 @@ void test_swapf_should_swap_0x13_into_0x21_save_in_file_reg_acess_bank_should_pa
 
  }
 
- UnityAssertEqualNumber((_U_SINT)(_US8 )((0x31)), (_U_SINT)(_US8 )((FSR[0xff0])), (((void *)0)), (_U_UINT)54, UNITY_DISPLAY_STYLE_HEX8);
+
 
 
 
@@ -221,7 +221,7 @@ void test_swapf_should_swap_0x51_into_0x15_default_operand2_acess_bank_should_pa
 
  }else { } CExceptionFrames[MY_ID].Exception = (0x5A5A5A5A); } else { error = CExceptionFrames[MY_ID].Exception; error=error; } CExceptionFrames[MY_ID].pFrame = PrevFrame; } if (CExceptionFrames[(0)].Exception != (0x5A5A5A5A)){
 
-  UnityAssertEqualNumber((_U_SINT)((1)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)115, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((2)), (_U_SINT)((ERR_INVALID_OPERAND)), (((void *)0)), (_U_UINT)115, UNITY_DISPLAY_STYLE_INT);
 
  }
 
@@ -293,7 +293,7 @@ void test_swapf_should_swap_0x11_into_0x11_save_in_wreg_with_bsr_5_should_pass()
 
  }
 
- UnityAssertEqualNumber((_U_SINT)(_US8 )((0x11)), (_U_SINT)(_US8 )((FSR[0xfe8])), (((void *)0)), (_U_UINT)151, UNITY_DISPLAY_STYLE_HEX8);
+
 
 }
 
@@ -361,7 +361,7 @@ void test_swapf_should_swap_0x04_into_0x40_save_in_file_reg_with_bsr_5_should_pa
 
  }
 
- UnityAssertEqualNumber((_U_SINT)(_US8 )((0x40)), (_U_SINT)(_US8 )((FSR[0xfa1])), (((void *)0)), (_U_UINT)185, UNITY_DISPLAY_STYLE_HEX8);
+
 
 }
 

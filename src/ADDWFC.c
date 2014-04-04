@@ -7,8 +7,8 @@
 unsigned char FSR[0x1000];
 
 int addwfc(Bytecode *code){
-	int status;
-	int temp1, temp2, temp3, temp4;
+
+	unsigned int temp1, temp2, temp3, temp4;
 
 	switch(check_valid_operands(code)){
 	

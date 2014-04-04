@@ -13,8 +13,6 @@ void test_movff_mov_file_location_0x011_to_0x010_should_pass(){
 	
 	FSR[code.operand1] = 1; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -22,7 +20,7 @@ void test_movff_mov_file_location_0x011_to_0x010_should_pass(){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
 	TEST_ASSERT_EQUAL(1, FSR[0x010]); //test if source moved to destination
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 }
 
 void test_movff_mov_file_location_0x011_to_0x0110_should_pass(){
@@ -32,8 +30,6 @@ void test_movff_mov_file_location_0x011_to_0x0110_should_pass(){
 	
 	FSR[code.operand1] = 2; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -41,7 +37,7 @@ void test_movff_mov_file_location_0x011_to_0x0110_should_pass(){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
 	TEST_ASSERT_EQUAL(2, FSR[0x110]); //test if source moved to destination
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 }
 
 void test_movff_mov_file_location_0x110_to_0x011_should_pass(){
@@ -51,8 +47,6 @@ void test_movff_mov_file_location_0x110_to_0x011_should_pass(){
 	
 	FSR[code.operand1] = 3; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -60,7 +54,7 @@ void test_movff_mov_file_location_0x110_to_0x011_should_pass(){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
 	TEST_ASSERT_EQUAL(3, FSR[0x11]); //test if source moved to destination
-	TEST_ASSERT_EQUAL_HEX8(0x02, PC);
+
 }
 
 void test_movff_mov_file_location_0x011_to_0xFFF_should_throw_exception(){
@@ -70,8 +64,6 @@ void test_movff_mov_file_location_0x011_to_0xFFF_should_throw_exception(){
 	
 	FSR[code.operand1] = 1; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -88,8 +80,6 @@ void test_movff_invalid_operand1_should_throw_exception(){
 	
 	FSR[code.operand1] = 1; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -106,8 +96,6 @@ void test_movff_invalid_operand2_should_throw_exception(){
 	
 	FSR[code.operand1] = 1; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);
@@ -124,8 +112,6 @@ void test_movff_invalid_operand3_should_throw_exception(){
 	
 	FSR[code.operand1] = 1; //source
 	FSR[code.operand2] = 0; //destination
-	code.absoluteAddress = 0x00;
-	PC = code.absoluteAddress;
 	
 	Try{
 		movff(&code);

@@ -8,33 +8,91 @@ int check_valid_operands(Bytecode *code){
 	if(code->operand1 < 0)
 		Throw(ERR_INVALID_OPERAND);
 	
-	else if(code->operand1 >= 0x100 && code->operand1 < 0xf80){
-		code->operand1 = code->operand1&0x0ff;
-		printf("Warning exceeded operand1 range\n");
-		return operand2_check(code);
+	else if(code->operand1 >= 0x100 && code->operand1 < 0xf80 || (code->operand1 >= 0xf80 && code->operand1 <= 0xfff)){
+		return operand1_exceeded_range_checks(code);
 	}
 	
-	else if((code->operand1 > -1 && code->operand1 <= 0xff) || (code->operand1 >= 0xf80 && code->operand1 <= 0xfff))
+	else if(code->operand1 > -1 && code->operand1 <= 0xff)
 		return operand2_check(code);
 
+}
+
+int operand1_exceeded_range_checks(Bytecode *code){
+	if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff){ //check if code operand1 is sfr
+		if(code->operand3 == -1){ //check if operand3 is default, check operand 2
+			
+			if(code->operand2 == ACCESS){ 
+				return operand2_check(code);
+			}
+			else if(code->operand2 == BANKED)
+				Throw(ERR_INVALID_OPERAND);
+			
+			else if(code->operand2 == W || code->operand2 == F || code->operand2 == 1 || code->operand2 == 0){
+				code->operand3 = ACCESS; //destroy operand3, go access
+				return operand2_check(code);
+			}
+			
+			else
+				Throw(ERR_INVALID_OPERAND);
+		}
+		
+		else if(code->operand3 == ACCESS || code->operand3 == 0) //if operand3 is access, stay access
+			return operand2_check(code);
+		
+		else if(code->operand3 == BANKED || code->operand3 == 1) //if operand3 is banked, throw
+			Throw(ERR_INVALID_OPERAND);
+		
+		else
+			Throw(ERR_INVALID_OPERAND);
+	}
+	
+	else if(code->operand1 >= 0x100 && code->operand1 < 0xf80 ){ // check if code operand1 is not sfr but exceed 0xff
+		if(code->operand3 == -1){ // if operand3 is set to default, check operand2
+			if(code->operand2 == ACCESS)
+				Throw(ERR_INVALID_OPERAND);
+			
+			else if(code->operand2 == BANKED)
+				Throw(ERR_INVALID_OPERAND);
+			
+			else if(code->operand2 == W || code->operand2 == F || code->operand2 == 1 || code->operand2 == 0){
+				code->operand3 = BANKED; //destroy operand3, go banked
+				FSR[BSR] = ((code->operand1&0xf00)>>8); // set msb as bsr value
+				code->operand1 = (code->operand1)&0xff; //destroy old operand1	
+				return operand2_check(code);
+			}
+			
+			else
+				Throw(ERR_INVALID_OPERAND);
+		}
+		
+		else if(code->operand3 == BANKED || code->operand3 == 1)
+			Throw(ERR_INVALID_OPERAND);
+
+		else if(code->operand3 == ACCESS || code->operand3 == 0)
+			Throw(ERR_INVALID_OPERAND);
+
+		else
+			Throw(ERR_INVALID_OPERAND);
+	}
+	
+	else 
+		Throw(ERR_INVALID_OPERAND);
 }
 
 int operand2_check(Bytecode *code){
 
 	//to check if operand 2 not default
-	if(code->operand2 == W || code->operand2 == F || code->operand2 == 1 || code->operand2 == 0){
+	if(code->operand2 == W || code->operand2 == F || code->operand2 == 1 || code->operand2 == 0)
 		return normal_operand2(code);
-	}
 		
 	//default operand2
-	else if((code->operand2 == ACCESS || code->operand2 == BANKED) && code->operand3 == -1){
+	else if((code->operand2 == ACCESS || code->operand2 == BANKED) && code->operand3 == -1)
 		return default_operand2(code);
-	}
 	
 	//default operand2 and operand3
 	else if(code->operand2 == -1 && code->operand3 == -1){
-		code->operand2 = F;
-		code->operand3 = ACCESS;
+		code->operand2 = F; //destroy and replace with f
+		code->operand3 = ACCESS; //destroy and replace with access
 		return access_destination_operand2(code);
 	}
 		
@@ -85,13 +143,9 @@ int banked_destination_operand2(Bytecode *code){
 	
 	//destination WREG
 	if(code->operand2 == W || code->operand2 == 0){
-		
-		//check if operand1 is SFR, ignore bsr
-		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
-			return 1;
-		
+				
 		//to check if bsr is in range of 0 to F
-		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 3;
 					
 		//invalid bsr range
@@ -102,12 +156,8 @@ int banked_destination_operand2(Bytecode *code){
 	//destination file reg
 	else if(code->operand2 == F || code->operand2 == 1){
 		
-		//check if operand1 is SFR, ignore bsr
-		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
-			return 2;
-		
 		//to check if bsr is in range of 0 to F
-		else if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
+		if(FSR[BSR] > 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 				
 		else
@@ -130,12 +180,8 @@ int default_operand2(Bytecode *code){
 	//banked
 	else if(code->operand2 == BANKED && code->operand3 == -1){
 		
-		//check if operand1 is SFR, ignore bsr 
-		if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff)
-			return 2;
-		
 		//to check if bsr is in range of 0 to F
-		else if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
+		if(FSR[BSR] >= 0x0 && FSR[BSR] <= 0xF)
 			return 4;
 		
 		//invalid bsr range
@@ -155,7 +201,7 @@ void check_operand1_access_range(Bytecode *code){
 		int temp1;
 		
 		temp1 = FSR[code->operand1]; //store value into temp
-		code->operand1 = code->operand1 | 0xf00;  //change addresses that are >= than 0x80 into  0xfxx
+		code->operand1 = code->operand1 | 0xf00;  //destroy and replace addresses that are >= than 0x80 into  0xfxx
 		FSR[code->operand1] = temp1; //place original value into the new address
 	}
 }

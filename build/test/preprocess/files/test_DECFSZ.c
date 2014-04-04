@@ -147,7 +147,7 @@ void test_decfsz_should_decrement_value_0x00_expect_0xff_pc_add_2_store_in_file_
 
  Instruction inst = { .mnemonic = DECFSZ, .name = "decfsz" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0xf89, .operand2 = F, .operand3 = ACCESS};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x244, .operand2 = F, .operand3 = -1};
 
 
 
@@ -165,7 +165,7 @@ void test_decfsz_should_decrement_value_0x00_expect_0xff_pc_add_2_store_in_file_
 
  }
 
- UnityAssertEqualNumber((_U_SINT)(_US8 )((0xff)), (_U_SINT)(_US8 )((FSR[code.operand1])), (((void *)0)), (_U_UINT)87, UNITY_DISPLAY_STYLE_HEX8);
+ UnityAssertEqualNumber((_U_SINT)(_US8 )((0xff)), (_U_SINT)(_US8 )((FSR[code.operand1+(FSR[0xfe0]<<8)])), (((void *)0)), (_U_UINT)87, UNITY_DISPLAY_STYLE_HEX8);
 
 }
 
@@ -367,7 +367,7 @@ void test_decfsz_should_decrement_value_0x10_expect_0x0f_pc_add_2_store_in_wreg_
 
  }
 
- UnityAssertEqualNumber((_U_SINT)(_US8 )((0x0f)), (_U_SINT)(_US8 )((FSR[0xfe8])), (((void *)0)), (_U_UINT)188, UNITY_DISPLAY_STYLE_HEX8);
+
 
 }
 

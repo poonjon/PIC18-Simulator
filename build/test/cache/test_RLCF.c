@@ -273,9 +273,9 @@ void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x11_store_in_wr
 
 
 
- UnityAssertEqualNumber((_U_SINT)((0b11111111)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)141, UNITY_DISPLAY_STYLE_INT);
 
- UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)142, UNITY_DISPLAY_STYLE_INT);
+
+
 
 }
 

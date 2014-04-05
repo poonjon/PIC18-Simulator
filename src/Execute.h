@@ -8,11 +8,12 @@
 unsigned extern char FSR[];
 
 int check_valid_operands(Bytecode *code);
+int operand1_exceeded_range_checks(Bytecode *code);
 int operand2_check(Bytecode *code);
 int normal_operand2(Bytecode *code);
-int default_operand2(Bytecode *code);
 int access_destination_operand2(Bytecode *code);
 int banked_destination_operand2(Bytecode *code);
+int default_operand2(Bytecode *code);
 void check_operand1_access_range(Bytecode *code);
 void check_status(int temp3, int temp1, int temp2, int temp4);
 int check_carry(int temp1, int temp2, int temp4);

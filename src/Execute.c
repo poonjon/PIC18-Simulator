@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "CException.h"
 #include "Bytecode.h"
-#include "EXECUTE.h"
+#include "Execute.h"
 
 int check_valid_operands(Bytecode *code){
 	
@@ -18,12 +18,14 @@ int check_valid_operands(Bytecode *code){
 }
 
 int operand1_exceeded_range_checks(Bytecode *code){
+	//edit default
 	if(code->operand1 >= 0xf80 && code->operand1 <= 0xfff){ //check if code operand1 is sfr
+		
 		if(code->operand3 == -1){ //check if operand3 is default, check operand 2
 			
-			if(code->operand2 == ACCESS){ 
+			if(code->operand2 == ACCESS)
 				return operand2_check(code);
-			}
+			
 			else if(code->operand2 == BANKED)
 				Throw(ERR_INVALID_OPERAND);
 			
@@ -39,14 +41,17 @@ int operand1_exceeded_range_checks(Bytecode *code){
 		else if(code->operand3 == ACCESS || code->operand3 == 0) //if operand3 is access, stay access
 			return operand2_check(code);
 		
-		else if(code->operand3 == BANKED || code->operand3 == 1) //if operand3 is banked, throw
-			Throw(ERR_INVALID_OPERAND);
+		else if(code->operand3 == BANKED || code->operand3 == 1){ //if operand3 is banked, destroy fsr, use bsr value
+			code->operand1 = (code->operand1)&0x0ff;
+			return operand2_check(code);
+		}
 		
 		else
 			Throw(ERR_INVALID_OPERAND);
 	}
-	
+	//edit default
 	else if(code->operand1 >= 0x100 && code->operand1 < 0xf80 ){ // check if code operand1 is not sfr but exceed 0xff
+		
 		if(code->operand3 == -1){ // if operand3 is set to default, check operand2
 			if(code->operand2 == ACCESS)
 				Throw(ERR_INVALID_OPERAND);
@@ -65,12 +70,16 @@ int operand1_exceeded_range_checks(Bytecode *code){
 				Throw(ERR_INVALID_OPERAND);
 		}
 		
-		else if(code->operand3 == BANKED || code->operand3 == 1)
-			Throw(ERR_INVALID_OPERAND);
-
-		else if(code->operand3 == ACCESS || code->operand3 == 0)
-			Throw(ERR_INVALID_OPERAND);
-
+		else if(code->operand3 == BANKED || code->operand3 == 1){ // destroy msb, use bsr value
+			code->operand1 = (code->operand1&0x0ff);
+			return operand2_check(code);
+		}
+		
+		else if(code->operand3 == ACCESS || code->operand3 == 0){ //destroy msb
+			code->operand1 = (code->operand1&0x0ff);
+			return operand2_check(code);
+		}
+		
 		else
 			Throw(ERR_INVALID_OPERAND);
 	}

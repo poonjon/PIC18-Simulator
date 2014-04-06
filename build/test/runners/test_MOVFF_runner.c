@@ -57,12 +57,12 @@ int main(void)
   Unity.TestFile = "test_MOVFF.c";
   UnityBegin();
   RUN_TEST(test_movff_mov_file_location_0x011_to_0x010_should_pass, 9);
-  RUN_TEST(test_movff_mov_file_location_0x011_to_0x0110_should_pass, 26);
-  RUN_TEST(test_movff_mov_file_location_0x110_to_0x011_should_pass, 43);
-  RUN_TEST(test_movff_mov_file_location_0x011_to_0xFFF_should_throw_exception, 60);
-  RUN_TEST(test_movff_invalid_operand1_should_throw_exception, 76);
-  RUN_TEST(test_movff_invalid_operand2_should_throw_exception, 92);
-  RUN_TEST(test_movff_invalid_operand3_should_throw_exception, 108);
+  RUN_TEST(test_movff_mov_file_location_0x011_to_0x0110_should_pass, 22);
+  RUN_TEST(test_movff_mov_file_location_0x110_to_0x011_should_pass, 34);
+  RUN_TEST(test_movff_mov_file_location_0x011_to_0xFFF_should_throw_exception, 47);
+  RUN_TEST(test_movff_invalid_operand1_should_throw_exception, 63);
+  RUN_TEST(test_movff_invalid_operand2_should_throw_exception, 79);
+  RUN_TEST(test_movff_invalid_operand3_should_throw_exception, 95);
 
   return (UnityEnd());
 }

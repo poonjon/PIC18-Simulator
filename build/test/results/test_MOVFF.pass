@@ -7,22 +7,22 @@
   :line: 9
   :message: ''
 - :test: test_movff_mov_file_location_0x011_to_0x0110_should_pass
-  :line: 26
+  :line: 22
   :message: ''
 - :test: test_movff_mov_file_location_0x110_to_0x011_should_pass
-  :line: 43
+  :line: 34
   :message: ''
 - :test: test_movff_mov_file_location_0x011_to_0xFFF_should_throw_exception
-  :line: 60
+  :line: 47
   :message: ''
 - :test: test_movff_invalid_operand1_should_throw_exception
-  :line: 76
+  :line: 63
   :message: ''
 - :test: test_movff_invalid_operand2_should_throw_exception
-  :line: 92
+  :line: 79
   :message: ''
 - :test: test_movff_invalid_operand3_should_throw_exception
-  :line: 108
+  :line: 95
   :message: ''
 :failures: []
 :ignores: []

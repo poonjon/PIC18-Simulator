@@ -19,7 +19,7 @@ void test_rlcf_00000000_with_carry_1_should_get_00000001_status_0x00_store_in_wr
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = ACCESS};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = ACCESS, .absoluteAddress = 0};
 
 
 
@@ -57,7 +57,7 @@ void test_rlcf_10000000_with_carry_1_should_get_00000001_status_0x01_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = F, .operand3 = ACCESS};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = F, .operand3 = ACCESS, .absoluteAddress = 0};
 
 
 
@@ -95,7 +95,7 @@ void test_rlcf_11000000_with_carry_1_should_get_10000001_status_0x11_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = ACCESS, .operand3 = -1};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = ACCESS, .operand3 = -1, .absoluteAddress = 0};
 
 
 
@@ -133,7 +133,7 @@ void test_rlcf_00000000_with_carry_0_should_get_00000000_status_0x11_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0xff2, .operand2 = ACCESS, .operand3 = -1};
+ Bytecode code = {.instruction = &inst, .operand1 = 0xff2, .operand2 = ACCESS, .operand3 = -1, .absoluteAddress = 0};
 
 
 
@@ -171,7 +171,7 @@ void test_rlcf_10000000_with_carry_1_should_get_00000000_status_0x05_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x92, .operand2 = F, .operand3 = ACCESS};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x92, .operand2 = F, .operand3 = ACCESS, .absoluteAddress = 0};
 
 
 
@@ -209,7 +209,7 @@ void test_rlcf_10100110_with_carry_1_should_get_01001101_status_0x01_store_in_wr
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = BANKED};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = BANKED, .absoluteAddress = 0};
 
 
 
@@ -249,7 +249,7 @@ void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x11_store_in_wr
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0xf97, .operand2 = W, .operand3 = BANKED};
+ Bytecode code = {.instruction = &inst, .operand1 = 0xf97, .operand2 = W, .operand3 = BANKED, .absoluteAddress = 0};
 
 
 
@@ -273,9 +273,9 @@ void test_rlcf_11111111_with_carry_1_should_get_11111111_status_0x11_store_in_wr
 
 
 
+ UnityAssertEqualNumber((_U_SINT)((0b11111111)), (_U_SINT)((FSR[0xfe8])), (((void *)0)), (_U_UINT)141, UNITY_DISPLAY_STYLE_INT);
 
-
-
+ UnityAssertEqualNumber((_U_SINT)((0b00010001)), (_U_SINT)((FSR[0xfd8])), (((void *)0)), (_U_UINT)142, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -289,7 +289,7 @@ void test_rlcf_01110110_with_carry_0_should_get_11101100_status_0x01_store_in_wr
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = BANKED};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = W, .operand3 = BANKED, .absoluteAddress = 0};
 
 
 
@@ -329,7 +329,7 @@ void test_rlcf_01001111_with_carry_0_should_get_10011110_status_0x10_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = F, .operand3 = BANKED};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = F, .operand3 = BANKED, .absoluteAddress = 0};
 
 
 
@@ -369,7 +369,7 @@ void test_rlcf_00001111_with_carry_0_should_get_00011110_status_0x00_store_in_fi
 
  Instruction inst = { .mnemonic = RLCF, .name = "rlcf" };
 
- Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = BANKED, .operand3 = -1};
+ Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = BANKED, .operand3 = -1, .absoluteAddress = 0};
 
 
 

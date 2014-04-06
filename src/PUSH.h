@@ -8,11 +8,9 @@
 #define TOSH 0xffe
 #define TOSL 0xffd
 
-
 unsigned extern char FSR[];
 unsigned extern int PIC18Stack[];
-extern int PC;
 
-void push(Bytecode *code);
+int push(Bytecode *code);
 
 #endif // PUSH_H

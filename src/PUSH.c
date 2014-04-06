@@ -9,7 +9,8 @@ int PC;
 
 void push(Bytecode *code){
 	FSR[STKPTR]++;
-	PC+=2;
-	PIC18Stack[FSR[STKPTR]] = PC;
-
+	code->absoluteAddress += 1;
+	PIC18Stack[FSR[STKPTR]] = code->absoluteAddress;
+	
+	return code->absoluteAddress;
 }

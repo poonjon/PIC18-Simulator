@@ -1,3 +1,13 @@
+/**
+ * Author: Poon Jon
+ * Email: poonjon93@gmail.com
+ * Date: 29/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microelectronics with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__SUBLW_H__
 #define	__SUBLW_H__
 
@@ -6,5 +16,12 @@
 
 unsigned extern char FSR[];
 
-void sublw(Bytecode *code);
+int sublw(Bytecode *code);
+void check_status(int result, int temp1, int temp2);
+int check_carry(int temp1, int temp2);
+int check_digital_carry(int temp1, int temp2); 
+int check_zero(int result);
+int check_negative(int result);
+int check_overflow(int temp1, int temp2);
+
 #endif	// __SUBLW_H__

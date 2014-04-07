@@ -15,9 +15,7 @@ typedef enum {
 	ACCESS = -5,
 	BANKED,
 	F,
-	W,
-	FILEREG,
-	WREG
+	W
 } Operand;
 
 typedef enum {
@@ -26,10 +24,12 @@ typedef enum {
 } ExceptionError;
 
 typedef enum {
-	SUBLW
+	SUBLW,
+	PUSH,
+	BZ
 } Mnemonic;
 				
-typedef struct {
+typedesf struct {
 	Mnemonic	mnemonic;
 	char *name;
 } Instruction;

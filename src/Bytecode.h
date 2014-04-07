@@ -24,6 +24,11 @@ typedef enum {
 } ExceptionError;
 
 typedef enum {
+	SUBLW,
+	PUSH,
+	BZ,
+	TBLWTPOSTDEC,
+	BTFSC,
 	MOVFF,
 	SWAPF,
 	DECFSZ,
@@ -41,9 +46,7 @@ typedef struct {
 	int operand1;
 	int operand2;
 	int operand3;
-	int absoluteAddress;
+	int absoluteAddress; 
 } Bytecode;
-
-
 
 #endif	// __BYTECODE_H__

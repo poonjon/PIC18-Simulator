@@ -28,7 +28,12 @@ typedef enum {
 	PUSH,
 	BZ,
 	TBLWTPOSTDEC,
-	BTFSC
+	BTFSC,
+	MOVFF,
+	SWAPF,
+	DECFSZ,
+	ADDWFC,
+	RLCF
 } Mnemonic;
 				
 typedef struct {

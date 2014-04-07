@@ -9,7 +9,7 @@ void tearDown(void){}
 void test_tblwt_postdec_should_decrement_010101_expect_00_should_pass(void){
 	int error;	
 	
-	Instruction inst = { .mnemonic = PUSH, .name = "push" };
+	Instruction inst = { .mnemonic = TBLWTPOSTDEC, .name = "TblwtPostDec" };
 	Bytecode code = {.instruction = &inst, .operand1 = -1, .operand2 = -1, .operand3 = -1, .absoluteAddress = 0};
 	
 	FSR[TABLAT] = 0x10;
@@ -25,7 +25,7 @@ void test_tblwt_postdec_should_decrement_010101_expect_00_should_pass(void){
 void test_tblwt_postdec_should_decrement_010000_expect_00ffff_should_pass(void){
 	int error;	
 	
-	Instruction inst = { .mnemonic = PUSH, .name = "push" };
+	Instruction inst = { .mnemonic = TBLWTPOSTDEC, .name = "TblwtPostDec" };
 	Bytecode code = {.instruction = &inst, .operand1 = -1, .operand2 = -1, .operand3 = -1, .absoluteAddress = 0};
 	
 	FSR[TABLAT] = 0x10;
@@ -43,7 +43,7 @@ void test_tblwt_postdec_should_decrement_010000_expect_00ffff_should_pass(void){
 void test_tblwt_postdec_should_throw_exception(void){
 	int error;	
 	
-	Instruction inst = { .mnemonic = PUSH, .name = "push" };
+	Instruction inst = { .mnemonic = TBLWTPOSTDEC, .name = "TblwtPostDec" };
 	Bytecode code = {.instruction = &inst, .operand1 = -1, .operand2 = -1, .operand3 = -1, .absoluteAddress = 0};
 	
 	FSR[TABLAT] = 0x10;

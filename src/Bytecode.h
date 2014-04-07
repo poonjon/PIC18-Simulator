@@ -26,10 +26,12 @@ typedef enum {
 typedef enum {
 	SUBLW,
 	PUSH,
-	BZ
+	BZ,
+	TBLWTPOSTDEC,
+	BTFSC
 } Mnemonic;
 				
-typedesf struct {
+typedef struct {
 	Mnemonic	mnemonic;
 	char *name;
 } Instruction;

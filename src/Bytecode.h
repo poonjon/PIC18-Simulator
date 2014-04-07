@@ -15,7 +15,9 @@ typedef enum {
 	ACCESS = -5,
 	BANKED,
 	F,
-	W
+	W,
+	FILEREG,
+	WREG
 } Operand;
 
 typedef enum {

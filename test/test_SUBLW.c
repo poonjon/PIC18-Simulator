@@ -9,6 +9,7 @@ void tearDown() {}
 void test_sublw_1_subtract_1_equal_0_carry_and_zero_should_set_to_1_should_pass(){
 	int error;
 	Instruction inst = { .mnemonic = SUBLW, .name = "sublw" };
+
 	Bytecode code = {.instruction = &inst, .operand1 = 0x12, .operand2 = -1, .operand3 = -1, .absoluteAddress = 0};
 	
 	FSR[WREG] = 0x01;
@@ -64,7 +65,20 @@ void test_sublw_invalid_operand2_should_throw_exception_pass(){
 	Bytecode code = {.instruction = &inst, .operand1 = 1, .operand2 = 2, .operand3 = -1, .absoluteAddress = 0};
 	
 	FSR[WREG] = 1;
+
+	Try{
+		sublw(&code);
+	}Catch(error){
+		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
+	}
 	
+}
+
+void test_sublw_invalid_operand3_should_throw_exception_pass(){
+	int error;
+	Instruction inst = { .mnemonic = SUBLW, .name = "sublw" };
+	Bytecode code = {.instruction = &inst, .operand1 = 1, .operand2 = -1, .operand3 = -5, .absoluteAddress = 0};
+
 	Try{
 		sublw(&code);
 	}Catch(error){
@@ -72,11 +86,11 @@ void test_sublw_invalid_operand2_should_throw_exception_pass(){
 	}
 }
 
-void test_sublw_invalid_operand3_should_throw_exception_pass(){
+void test_sublw_invalid_operand2_and_operand3_should_throw_exception_pass(){
 	int error;
 	Instruction inst = { .mnemonic = SUBLW, .name = "sublw" };
-	Bytecode code = {.instruction = &inst, .operand1 = 1, .operand2 = -1, .operand3 = -5, .absoluteAddress = 0};
-	
+	Bytecode code = {.instruction = &inst, .operand1 = 1, .operand2 = 2, .operand3 = -5};
+
 	FSR[WREG] = 1;
 	
 	Try{
@@ -84,6 +98,7 @@ void test_sublw_invalid_operand3_should_throw_exception_pass(){
 	}Catch(error){
 		TEST_ASSERT_EQUAL(1, ERR_INVALID_OPERAND);
 	}
+
 }
 
 

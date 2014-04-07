@@ -1,0 +1,85 @@
+---
+:source:
+  :path: test
+  :file: test_ADDWFC.c
+:successes:
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_wreg_access_should_pass
+  :line: 10
+  :message: ''
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_file_access_should_pass
+  :line: 24
+  :message: ''
+- :test: test_addwfc_should_add_0x02_to_0x01_expect_0x03_save_in_file_access_should_pass
+  :line: 38
+  :message: ''
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_file_0xfa1_access_should_pass
+  :line: 52
+  :message: ''
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_wreg_bsr_5_should_pass
+  :line: 66
+  :message: ''
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_file_bsr_5_should_pass
+  :line: 81
+  :message: ''
+- :test: test_addwfc_should_add_0x80_to_0x80_expect_0x00_save_in_wreg_status_0x0d_should_pass
+  :line: 96
+  :message: ''
+- :test: test_addwfc_should_add_0xff_to_0x01_expect_0x00_save_in_wreg_status_0x07_should_pass
+  :line: 111
+  :message: ''
+- :test: test_addwfc_should_add_0x0f_to_0x01_expect_0x00_save_in_wreg_status_0x10_should_pass
+  :line: 126
+  :message: ''
+- :test: test_addwfc_should_add_0x0f_to_0x0a_expect_0x19_save_in_file_status_0x02_should_pass
+  :line: 141
+  :message: ''
+- :test: test_addwfc_should_add_0x00_to_0x00_expect_0x00_save_in_file_status_0x00_should_pass
+  :line: 156
+  :message: ''
+- :test: test_addwfc_should_add_0xbb_to_0xcc_expect_0x87_save_in_file_status_0x13_should_pass
+  :line: 171
+  :message: ''
+- :test: test_addwfc_should_add_0x01_to_0x01_expect_0x02_save_in_file_bsr_5_status_0x00_should_pass
+  :line: 186
+  :message: ''
+- :test: test_addwfc_should_add_0x03_to_0x01_expect_0x04_save_in_file_bsr_5_status_0x00_should_pass
+  :line: 202
+  :message: ''
+- :test: test_addwfc_should_add_0x0a_to_0x0a_expect_0x14_save_in_file_bsr_5_status_0x02_should_pass
+  :line: 218
+  :message: ''
+- :test: test_addwfc_should_add_0xff_to_0x01_with_carry_expect_0x00_save_in_file_bsr_5_status_0x03_should_pass
+  :line: 234
+  :message: ''
+- :test: test_addwfc_should_add_0x0a_to_0x0a_with_carry_expect_0x15_save_in_file_bsr_5_status_0x02_should_pass
+  :line: 250
+  :message: ''
+- :test: test_addwfc_should_add_0x0a_to_0x01_with_carry_expect_0x0b_default_operand2_bsr_5_status_0x02_should_pass
+  :line: 266
+  :message: ''
+- :test: test_addwfc_should_add_0xfe_to_0x01_with_carry_expect_0x00_save_in_wreg_status_0x07_should_pass
+  :line: 282
+  :message: ''
+- :test: test_addwfc_should_add_0x60_to_0x60_with_carry_expect_0x00_save_in_wreg_status_0x07_should_pass
+  :line: 297
+  :message: ''
+- :test: test_addwfc_invalid_operand1_should_throw_exception
+  :line: 312
+  :message: ''
+- :test: test_addwfc_invalid_operand2_should_throw_exception
+  :line: 330
+  :message: ''
+- :test: test_addwfc_invalid_operand3_should_throw_exception
+  :line: 348
+  :message: ''
+- :test: test_addwfc_default_operand2_invalid_operand3_should_throw_exception
+  :line: 365
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 24
+  :passed: 24
+  :failed: 0
+  :ignored: 0
+:stdout: []

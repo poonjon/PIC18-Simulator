@@ -1,3 +1,13 @@
+/**
+ * Author: Poon Jon
+ * Email: poonjon93@gmail.com
+ * Date: 29/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microelectronics with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef	__BYTECODE_H__
 #define	__BYTECODE_H__
 
@@ -14,11 +24,12 @@ typedef enum {
 } ExceptionError;
 
 typedef enum {
+	SUBLW,
 	PUSH,
 	BZ
 } Mnemonic;
 				
-typedef struct {
+typedesf struct {
 	Mnemonic	mnemonic;
 	char *name;
 } Instruction;
@@ -28,7 +39,7 @@ typedef struct {
 	int operand1;
 	int operand2;
 	int operand3;
-	int absoluteAddress;
+	int absoluteAddress; 
 } Bytecode;
 
 #endif	// __BYTECODE_H__

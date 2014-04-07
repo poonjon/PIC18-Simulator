@@ -1,3 +1,13 @@
+/**
+ * Author: Poon Jon
+ * Email: poonjon93@gmail.com
+ * Date: 29/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microelectronics with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #include <stdio.h>
 #include "CException.h"
 #include "Bytecode.h"
@@ -6,6 +16,11 @@
 unsigned char TABLE[0x200000];
 unsigned char FSR[0x1000];
 
+/**
+// write into table and decrement
+// input: bytecode
+// return: absoluteAddress
+**/
 int tblwt_postdec(Bytecode *code){
 	int tblptr_h, tblptr_l, tblptr_u;
 	int tableAdd;

@@ -1,3 +1,13 @@
+/**
+ * Author: Poon Jon
+ * Email: poonjon93@gmail.com
+ * Date: 29/3/2014
+ * Project name: PIC18 simulator
+ * Programme: Microelectronics with Embedded Technology
+ * Institution: Tunku Abdul Rahman University College
+ * Copyright: GPLv3
+ */
+
 #ifndef BZ_H
 #define BZ_H
 
